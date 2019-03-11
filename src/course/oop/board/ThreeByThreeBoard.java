@@ -12,7 +12,7 @@ public class ThreeByThreeBoard {
 		}
 		
 		if(board[row][col] == 0) {
-			board[row][col] = player;
+			board[row][col] = player;		
 			return true;
 		}
 		else {
