@@ -21,3 +21,5 @@ or
 Note: The computer player is implemented inside of the driver. It moves randomly and sometimes picks many squares before finding one that is correct
 
 The manual driver has some ASCII art included
+
+The computer player is pretty bad. To get it to win I would reccomend setting the timeout to 1 so you forfeit all your turns
