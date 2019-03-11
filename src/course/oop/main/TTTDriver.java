@@ -88,7 +88,6 @@ public class TTTDriver {
 	public static void playTwoPlayerGame(int timeout) {
 		int turn = 0;
 		while (!(readMove(timeout, turn%2 + 1)) || ticTacToe.determineWinner() == 0) {
-			readMove(timeout, turn%2 + 1);
 			turn++;
 		}
 		printFinishedMessage();
