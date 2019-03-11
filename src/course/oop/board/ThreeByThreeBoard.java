@@ -23,6 +23,7 @@ public class ThreeByThreeBoard {
 	}
 	
 	public int determineWinner() {
+		//Check all the win lines
 		if (board[1][1] != 0 && (board[1][1] == board[0][0] && board[1][1] == board[2][2] ||
 			board[1][1] == board[0][2] && board[1][1] == board[2][0] ||
 			board[1][1] == board[0][1] && board[1][1] == board[2][1] ||
@@ -37,7 +38,17 @@ public class ThreeByThreeBoard {
 				 board[2][2] == board[0][1] && board[2][2] == board[0][2] )) {
 			return board[2][2];
 		}
-		return 0;
+		
+		//See if every square has been marked, return still in progress if not
+		for(int i = 0; i < 3; ++i) {
+			for(int j = 0; j < 3; ++j) {
+				if (board[i][j] == 0)
+					return 0;
+			}
+		}
+		
+		//Return tie
+		return 3;
 	}
 	
 	public int getSquare(int row, int col) {

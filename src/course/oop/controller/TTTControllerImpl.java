@@ -3,37 +3,33 @@ package course.oop.controller;
 import course.oop.board.ThreeByThreeBoard;
 import course.oop.player.HumanPlayer;
 
-import java.util.HashMap;
-
 public class TTTControllerImpl implements TTTControllerInterface {
 	
-	public HashMap<Integer, HumanPlayer> players = new HashMap();
-	public ThreeByThreeBoard gameBoard;
+	HumanPlayer[] players = new HumanPlayer[2];
+	ThreeByThreeBoard gameBoard;
 
 	@Override
 	public void startNewGame(int numPlayers, int timeoutInSecs) {
 		gameBoard = new ThreeByThreeBoard();
+		
 	}
 
 	@Override
 	public void createPlayer(String username, String marker, int playerNum) {
-		if (players.get(playerNum) != null) {
-			System.out.println("Player number already taken");
-			return;
-		}
-		
 		if (marker.length() > 3) {
-			System.out.println("Marker must be 3 or less characters");
+			System.out.println("Marker must be 3 or less characters"); //for now
 			return;
 		}
 		
-		if (playerNum < 1) {
-			System.out.println("Player number must be a positive integer");
+		if (playerNum != 1 && playerNum != 2) {
+			System.out.println("Player number must be 1 or 2");
 			return;
 		}
 		
-		//DOES NOT currently check if the userName or marker is already taken
-		players.put(new Integer(playerNum), new HumanPlayer(username, marker));
+		if(playerNum == 1)
+			players[0] = new HumanPlayer(username, marker);
+		else
+			players[1] = new HumanPlayer(username, marker);
 	}
 
 	@Override
@@ -71,7 +67,7 @@ public class TTTControllerImpl implements TTTControllerInterface {
 	
 	public String getSquare(int row, int col) {
 		if(gameBoard.getSquare(row,col) > 0)
-			return String.format("%3s", players.get(gameBoard.getSquare(row,col)).getMarker());
+			return String.format("%3s", players[gameBoard.getSquare(row,col) - 1].getMarker());
 		else
 			return "   ";
 	}
