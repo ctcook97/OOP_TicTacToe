@@ -28,6 +28,9 @@ public class TTTDriver {
 			ticTacToe.createPlayer(username, marker, 2);
 			ticTacToe.startNewGame(2, timeout);
 		}
+		else {
+			ticTacToe.startNewGame(1, timeout);
+		}
 		
 		
 	}

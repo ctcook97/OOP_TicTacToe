@@ -24,17 +24,14 @@ public class TTTControllerImpl implements TTTControllerInterface {
 		int gameType = s.nextInt();
 		if(gameType == 1) {
 			if (numPlayers == 1) {
-				playTwoPlayerGame(timeoutInSecs);
+				createPlayer("Computer", "COM", 2); //FOR NOW, a computer player is just a human player object since they are not different (yet)
+				playOnePlayerGame(timeoutInSecs);
 			}
 			else {
 				playTwoPlayerGame(timeoutInSecs);
 			}
 		}
 		s.close();
-		
-		if(numPlayers == 1) {
-			createPlayer("Computer", "COM", 2); //FOR NOW, a computer player is just a human player object since they are not different (yet)
-		}
 	}
 
 	@Override
@@ -92,7 +89,20 @@ public class TTTControllerImpl implements TTTControllerInterface {
 		//Probably not hugely efficient but should not be an issue with 9 squares
 		int ran = (int) Math.random()*9;
 		while(! setSelection(ran/3, ran%3, player)) {
-			continue;
+			ran = (int) (Math.random()*9);
+		}
+		System.out.println(getGameDisplay());
+	}
+	
+	//ADD FINISHED MESSAGES. And ability to quit game
+	public void playOnePlayerGame(int timeout) {
+		while(true) {
+			humanMove(timeout, 1);
+			if(determineWinner() > 0)
+				break;
+			randomMove(2);
+			if(determineWinner() > 0)
+				break;
 		}
 	}
 	
