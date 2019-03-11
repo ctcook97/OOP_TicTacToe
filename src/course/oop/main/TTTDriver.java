@@ -13,6 +13,15 @@ public class TTTDriver {
 	
 	public static void main(String[] args) {
 		
+		System.out.println("  _______ _        _______           _______         \n" + 
+				" |__   __(_)      |__   __|         |__   __|        \n" + 
+				"    | |   _  ___     | | __ _  ___     | | ___   ___ \n" + 
+				"    | |  | |/ __|    | |/ _` |/ __|    | |/ _ \\ / _ \\\n" + 
+				"    | |  | | (__     | | (_| | (__     | | (_) |  __/\n" + 
+				"    |_|  |_|\\___|    |_|\\__,_|\\___|    |_|\\___/ \\___|\n" + 
+				"                                                     \n" + 
+				"        by Cameron Cook\n");
+		
 		ticTacToe = new TTTControllerImpl();
 		
 		Scanner s = new Scanner(System.in);
@@ -59,7 +68,6 @@ public class TTTDriver {
 		
 	}
 	
-	//And add readme, make it so adding extra space doesn't break it
 	public static void playOnePlayerGame(int timeout) {
 		while(true) {
 			
@@ -110,11 +118,14 @@ public class TTTDriver {
 				}
 				if (in.ready()) {
 				    String s = in.readLine();
+				    while(s.charAt(s.length()-1) == ' ') { //Remove trailing spaces
+				    	s = s.substring(0, s.length()-1);
+				    }
 				    if(s.equals("quit")) {
 				    	System.out.println("quitting game");
 				    	return false;
 				    }
-				    int row = Integer.valueOf(s.substring(0,s.indexOf(" ")));
+				    int row = Integer.valueOf(s.substring(0,s.indexOf(" "))); //get row and col
 				    s = s.substring(s.indexOf(" ") + 1);
 				    int col = Integer.valueOf(s);
 				    if(ticTacToe.setSelection(row, col, currentPlayer)) {
