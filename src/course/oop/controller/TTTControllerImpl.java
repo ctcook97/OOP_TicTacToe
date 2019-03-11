@@ -16,22 +16,9 @@ public class TTTControllerImpl implements TTTControllerInterface {
 	@Override
 	public void startNewGame(int numPlayers, int timeoutInSecs) {
 		gameBoard = new ThreeByThreeBoard();
-		
-		System.out.println("Please enter '1' if you wish to manually play the game with 2 players or one player vs the computer (For example the TTTDriver.java I wrote");
-		System.out.println("Please enter '2' if you have written a custom driver to do the moves of a 2 player game for testing purposes (For example the SampleAutoTest)");
-		Scanner s = new Scanner(System.in);
-		System.out.print("Selection: ");
-		int gameType = s.nextInt();
-		if(gameType == 1) {
-			if (numPlayers == 1) {
-				createPlayer("Computer", "COM", 2); //FOR NOW, a computer player is just a human player object since they are not different (yet)
-				playOnePlayerGame(timeoutInSecs);
-			}
-			else {
-				playTwoPlayerGame(timeoutInSecs);
-			}
+		if (numPlayers == 1) {
+			createPlayer("Computer", "COM", 2); //FOR NOW, a computer player is just a human player object since they are not different
 		}
-		s.close();
 	}
 
 	@Override
@@ -77,6 +64,7 @@ public class TTTControllerImpl implements TTTControllerInterface {
 		return boardString;
 	}
 	
+	//Helper method for getGameDisplay()
 	public String getSquare(int row, int col) {
 		if(gameBoard.getSquare(row,col) > 0)
 			return String.format("%3s", players[gameBoard.getSquare(row,col) - 1].getMarker());
@@ -84,69 +72,8 @@ public class TTTControllerImpl implements TTTControllerInterface {
 			return "   ";
 	}
 	
-	public void randomMove(int player) {
-		//Keeps randomly picking squares until it finds an open one
-		//Probably not hugely efficient but should not be an issue with 9 squares
-		int ran = (int) Math.random()*9;
-		while(! setSelection(ran/3, ran%3, player)) {
-			ran = (int) (Math.random()*9);
-		}
-		System.out.println(getGameDisplay());
-	}
-	
-	//ADD FINISHED MESSAGES. And ability to quit game
-	public void playOnePlayerGame(int timeout) {
-		while(true) {
-			humanMove(timeout, 1);
-			if(determineWinner() > 0)
-				break;
-			randomMove(2);
-			if(determineWinner() > 0)
-				break;
-		}
-	}
-	
-	public void playTwoPlayerGame(int timeout) {
-		int turn = 0;
-		while (determineWinner() == 0) {
-			humanMove(timeout, turn%2 + 1);
-			turn++;
-		}
-	}
-	
-	public void humanMove(int timeout, int currentPlayer) {
-		if(timeout <= 0) {
-			timeout = 100000; //Cheap fix for now, If you entered no timeout there's really just a timeout of 100,000 seconds
-		}
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		long start = System.currentTimeMillis();
-		try {
-			System.out.print(players[currentPlayer-1].getUserName());
-			System.out.println(", enter your desired row and column, seperated by a space. Must be integers between 0 and 2. Do not include any additional spaces");
-			while(true) {
-				while ((System.currentTimeMillis() - start) < timeout * 1000 && !in.ready()) {
-					
-				}
-				if (in.ready()) {
-				    String s = in.readLine();
-				    int row = Integer.valueOf(s.substring(0,s.indexOf(" ")));
-				    s = s.substring(s.indexOf(" ") + 1);
-				    int col = Integer.valueOf(s);
-				    if(setSelection(row, col, currentPlayer)) {
-				    	System.out.println(getGameDisplay());
-				    	break;
-				    }
-				    else {
-				    	System.out.println("Try again:");
-				    }
-				} else {
-				    System.out.println("Turn forfeited as timeout was reached.");
-				    break;
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public String getPlayerName(int playerNum) {
+		return players[playerNum-1].getUserName();
 	}
 
 }
