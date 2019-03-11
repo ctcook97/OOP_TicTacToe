@@ -48,6 +48,7 @@ public class TTTDriver {
 					System.out.println("Game starting. At any time enter 'quit' to quit the game");
 					ticTacToe.startNewGame(2, timeout);
 					System.out.println(ticTacToe.getGameDisplay());
+					System.out.println("_____________________________________________________\n");
 					playTwoPlayerGame(timeout);
 					break;
 				}
@@ -62,6 +63,7 @@ public class TTTDriver {
 					System.out.println("Game starting. At any time enter 'quit' to quit the game");
 					ticTacToe.startNewGame(1, timeout);
 					System.out.println(ticTacToe.getGameDisplay());
+					System.out.println("_____________________________________________________\n");
 					playOnePlayerGame(timeout);
 					break;
 				}
@@ -138,6 +140,7 @@ public class TTTDriver {
 				    int col = Integer.valueOf(s);
 				    if(ticTacToe.setSelection(row, col, currentPlayer)) {
 				    	System.out.println(ticTacToe.getGameDisplay());
+				    	System.out.println("_____________________________________________________\n");
 				    	break;
 				    }
 				    else {
@@ -145,6 +148,7 @@ public class TTTDriver {
 				    }
 				} else {
 				    System.out.println("Turn forfeited as timeout was reached."); //So you just lose your turn if you do not go on time. This means someone can go twice in a row
+				    System.out.println("\n_____________________________________________________\n");
 				    break;
 				}
 			}
@@ -158,11 +162,13 @@ public class TTTDriver {
 		//Keeps randomly picking squares until it finds an open one
 		//Probably not hugely efficient but should not be an issue with 9 squares
 		//HOWEVER this does cause a lot of "square already taken" messages to get printed because it might have to try a bunch before finding one
+		System.out.println("Computer moving:\n");
 		int ran = (int) (Math.random()*9);
 		while(! ticTacToe.setSelection(ran/3, ran%3, player)) {
 			ran = (int) (Math.random()*9);
 		}
 		System.out.println(ticTacToe.getGameDisplay());
+        System.out.println("_____________________________________________________\n");
 	}
 	
 }
