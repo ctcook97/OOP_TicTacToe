@@ -13,7 +13,8 @@ public class TTTDriver {
 	
 	public static void main(String[] args) {
 		
-		System.out.println("  _______ _        _______           _______         \n" + 
+		System.out.println(
+				"  _______ _        _______           _______         \n" + 
 				" |__   __(_)      |__   __|         |__   __|        \n" + 
 				"    | |   _  ___     | | __ _  ___     | | ___   ___ \n" + 
 				"    | |  | |/ __|    | |/ _` |/ __|    | |/ _ \\ / _ \\\n" + 
@@ -46,6 +47,7 @@ public class TTTDriver {
 				if(start.contentEquals("start")) {
 					System.out.println("Game starting. At any time enter 'quit' to quit the game");
 					ticTacToe.startNewGame(2, timeout);
+					System.out.println(ticTacToe.getGameDisplay());
 					playTwoPlayerGame(timeout);
 					break;
 				}
@@ -59,6 +61,7 @@ public class TTTDriver {
 				if(start.contentEquals("start")) {
 					System.out.println("Game starting. At any time enter 'quit' to quit the game");
 					ticTacToe.startNewGame(1, timeout);
+					System.out.println(ticTacToe.getGameDisplay());
 					playOnePlayerGame(timeout);
 					break;
 				}
@@ -101,6 +104,11 @@ public class TTTDriver {
 			System.out.println("Tie game");
 			break;
 		}
+		System.out.println("   ___   _   __  __ ___    _____   _____ ___ \n" + 
+				"  / __| /_\\ |  \\/  | __|  / _ \\ \\ / / __| _ \\\n" + 
+				" | (_ |/ _ \\| |\\/| | _|  | (_) \\ V /| _||   /\n" + 
+				"  \\___/_/ \\_\\_|  |_|___|  \\___/ \\_/ |___|_|_\\\n" + 
+				"                                             \n");
 	}
 	
 	public static boolean readMove(int timeout, int currentPlayer) {
