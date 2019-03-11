@@ -1,10 +1,5 @@
 package course.oop.controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Scanner;
-
 import course.oop.board.ThreeByThreeBoard;
 import course.oop.player.HumanPlayer;
 
@@ -36,6 +31,9 @@ public class TTTControllerImpl implements TTTControllerInterface {
 
 	@Override
 	public boolean setSelection(int row, int col, int currentPlayer) {
+		if(currentPlayer != 1 && currentPlayer != 2) {
+			return false;
+		}
 		return gameBoard.setSelection(row, col, currentPlayer);
 	}
 

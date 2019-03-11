@@ -4,7 +4,7 @@ public class HumanPlayer {
 	
 	String userName;
 	String marker;
-	private int wins;
+	private int wins; //These will be used in later iterations
 	private int losses;
 	
 	public HumanPlayer(String Name, String Marker) {

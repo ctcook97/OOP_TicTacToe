@@ -111,7 +111,7 @@ public class TTTDriver {
 		long start = System.currentTimeMillis();
 		try {
 			System.out.print(ticTacToe.getPlayerName(currentPlayer));
-			System.out.println(", enter your desired row and column, seperated by a space. Must be integers between 0 and 2. Do not include any additional spaces");
+			System.out.println(", enter your desired row and column, seperated by a space. Must be integers between 0 and 2");
 			while(true) {
 				while ((System.currentTimeMillis() - start) < timeout * 1000 && !in.ready()) {
 					
@@ -156,7 +156,5 @@ public class TTTDriver {
 		}
 		System.out.println(ticTacToe.getGameDisplay());
 	}
-	
-	
 	
 }
