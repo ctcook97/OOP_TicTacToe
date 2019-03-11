@@ -39,6 +39,8 @@ public class TTTControllerImpl implements TTTControllerInterface {
 	@Override
 	public boolean setSelection(int row, int col, int currentPlayer) {
 		gameBoard.setSelection(row, col, currentPlayer);
+		if(gameBoard.getSquare(row,col) > 0)
+			return true;
 		return false;
 	}
 
@@ -62,6 +64,7 @@ public class TTTControllerImpl implements TTTControllerInterface {
 		boardString += getSquare(2,0) + "|";
 		boardString += getSquare(2,1) + "|";
 		boardString += getSquare(2,2) + "\n   |   |   ";
+		boardString += "\n";
 		
 		return boardString;
 	}
